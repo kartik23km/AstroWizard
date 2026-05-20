@@ -2,14 +2,15 @@ import { Link } from 'react-router-dom';
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 px-4">
-      <h1 className="text-6xl font-bold text-gray-900">404</h1>
-      <p className="mt-4 text-xl text-gray-600">Page not found</p>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-transparent px-4 text-center">
+      <span className="text-8xl block mb-4">🪐</span>
+      <h1 className="text-6xl font-bold bg-linear-to-r from-violet-glow to-mystic-pink bg-clip-text text-transparent">404</h1>
+      <p className="mt-4 text-xl text-light-gray">This coordinate does not exist in our galaxy.</p>
       <Link
         to="/"
-        className="mt-6 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+        className="cursor-pointer mt-8 rounded-xl bg-violet-glow px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-glow/20 hover:bg-violet-glow/90 transition-all duration-300"
       >
-        Go back home
+        Return to Orbit
       </Link>
     </div>
   );

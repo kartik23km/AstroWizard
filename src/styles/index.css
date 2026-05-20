@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+
+body {
+  background-color: var(--color-space-dark);
+  color: var(--color-soft-white);
+}
+
 @theme {
     --color-primary: #6D28D9;
     --color-deep-purple: #4C1D95;
@@ -18,4 +24,17 @@
     --color-muted-gray: #334155;
     --color-light-gray: #CBD5E1;
     --color-soft-white: #F8FAFC;
+
+    --animate-twinkle: twinkle 4s ease-in-out infinite;
+
+    @keyframes twinkle {
+        0%, 100% {
+            opacity: 0.15;
+            transform: scale(0.8);
+        }
+        50% {
+            opacity: 0.95;
+            transform: scale(1.2);
+        }
+    }
 }

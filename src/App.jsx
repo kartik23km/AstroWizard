@@ -1,10 +1,16 @@
 import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from '@/routes/AppRoutes';
+import AppRoutes from './routes/AppRoutes';
+import StarryBackground from '@/components/atoms/StarryBackground';
 
 function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <div className="relative min-h-screen bg-space-dark text-soft-white overflow-x-hidden">
+        <StarryBackground />
+        <div className="relative z-10 flex flex-col min-h-screen">
+          <AppRoutes />
+        </div>
+      </div>
     </BrowserRouter>
   );
 }
