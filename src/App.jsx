@@ -1,6 +1,7 @@
-import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './routes/AppRoutes';
-import StarryBackground from '@/components/atoms/StarryBackground';
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+import StarryBackground from "@/components/atoms/StarryBackground";
+import Footer from "./pages/home/_components/home/footer";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <StarryBackground />
         <div className="relative z-10 flex flex-col min-h-screen">
           <AppRoutes />
+          <Footer />
         </div>
       </div>
     </BrowserRouter>
