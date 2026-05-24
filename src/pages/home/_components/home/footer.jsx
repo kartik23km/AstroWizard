@@ -76,21 +76,27 @@ const Footer = () => {
       <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-16 pb-8">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-14">
-
           {/* Brand Column */}
           <div className="lg:col-span-2 flex flex-col gap-5">
             <div>
               <h3 className="font-Cinzel text-2xl font-bold text-soft-white mb-1">
-                Astro<span className="text-transparent bg-clip-text bg-linear-to-r from-violet-glow to-gold">Wizard</span>
+                Astro
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-violet-glow to-gold">
+                  Wizard
+                </span>
               </h3>
-              <p className="text-xs text-light-gray/40 uppercase tracking-widest">Ancient Wisdom · Modern Clarity</p>
+              <p className="text-xs text-light-gray/40 uppercase tracking-widest">
+                Ancient Wisdom · Modern Clarity
+              </p>
             </div>
             <p className="text-sm text-light-gray/60 leading-relaxed font-light max-w-sm">
-              India&apos;s most trusted astrology platform. Connecting millions of seekers with certified cosmic guides since 2020.
+              India&apos;s most trusted astrology platform. Connecting millions
+              of seekers with certified cosmic guides since 2020.
             </p>
 
             {/* Contact Info */}
-            <ul className="flex flex-col gap-3 mt-1">
+            {/* change the visibility if required */}
+            <ul className="flex-col gap-3 mt-1 hidden">
               <li className="flex items-center gap-3 text-xs text-light-gray/50 hover:text-gold transition-colors duration-200 group">
                 <EnvelopeIcon className="size-4 text-violet-glow/60 shrink-0" />
                 <span>support@astrowizard.com</span>
@@ -106,7 +112,7 @@ const Footer = () => {
             </ul>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-3 mt-2">
+            <div className="hidden items-center gap-3 mt-2">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}

@@ -44,11 +44,11 @@ const Astrologers = () => {
         </div>
 
         {/* Card Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {astrologers.map((astrologer, idx) => (
             <div
               key={astrologer.id}
-              onClick={() => navigate(`/astrologers/${astrologer.id}`)}
+              onClick={() => navigate(`/astrologer-profile/${astrologer.id}`)}
               className="group relative cursor-pointer rounded-2xl bg-dark-surface/40 backdrop-blur-md border border-white/5 p-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_25px_rgba(109,40,217,0.2)] hover:border-violet-glow/25"
             >
               {/* Hover glow */}
@@ -94,7 +94,7 @@ const Astrologers = () => {
                 <div className="flex items-center justify-center gap-1.5 text-xs">
                   <PhoneIcon className="size-3.5 text-violet-glow/70" />
                   <span className="text-soft-white font-semibold">
-                    ${astrologer.callRate}/min
+                    ₹{astrologer.callRate}/min
                   </span>
                 </div>
               </div>

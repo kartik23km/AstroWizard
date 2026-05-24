@@ -12,7 +12,7 @@ const navItems = [
   { name: "About", path: "/about" },
   { name: "Services", path: "/services" },
   { name: "Astrologers", path: "/astrologers" },
-  { name: "Contact", path: "/contact" },
+  { name: "Contact", path: "/contact", hidden: true },
 ];
 
 const Header = () => {
@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <header className="relative z-50 w-full">
       {/* Top Bar */}
-      <div className="flex justify-between items-center px-5 md:px-10 py-4 md:py-5">
+      <div className="flex justify-between items-center px-5 lg:px-10 py-4 lg:py-5">
         {/* Logo */}
         <div
           className="cursor-pointer"
@@ -34,7 +34,7 @@ const Header = () => {
             closeMenu();
           }}
         >
-          <h3 className="font-Cinzel text-xl md:text-2xl font-bold text-soft-white mb-0.5 leading-tight">
+          <h3 className="font-Cinzel text-xl lg:text-2xl font-bold text-soft-white mb-0.5 leading-tight">
             Astro
             <span className="text-transparent bg-clip-text bg-linear-to-r from-violet-glow to-gold">
               Wizard
@@ -46,7 +46,7 @@ const Header = () => {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex">
+        <nav className="hidden lg:flex">
           <ul className="flex gap-8 lg:gap-10">
             {navItems.map((item) => (
               <li key={item.name}>
@@ -67,7 +67,7 @@ const Header = () => {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Button
             title={
               <span className="flex items-center gap-2">
@@ -82,7 +82,7 @@ const Header = () => {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden cursor-pointer flex items-center justify-center size-10 rounded-xl bg-white/5 border border-white/10 text-soft-white hover:bg-white/10 transition-all duration-200 active:scale-95"
+          className="lg:hidden cursor-pointer flex items-center justify-center size-10 rounded-xl bg-white/5 border border-white/10 text-soft-white hover:bg-white/10 transition-all duration-200 active:scale-95"
           onClick={toggleMenu}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
@@ -96,7 +96,7 @@ const Header = () => {
 
       {/* Mobile Drawer */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
@@ -104,7 +104,10 @@ const Header = () => {
           {/* Mobile Nav Links */}
           <ul className="flex flex-col gap-1 mb-4">
             {navItems.map((item) => (
-              <li key={item.name}>
+              <li
+                key={item.name}
+                className={`${item.hidden ? "hidden" : "block"}`}
+              >
                 <NavLink
                   to={item.path}
                   onClick={closeMenu}
