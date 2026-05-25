@@ -8,7 +8,6 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-transparent text-soft-white flex flex-col">
-      <Header />
       <main className="grow max-w-6xl mx-auto px-6 py-16 flex flex-col justify-center w-full">
         <div className="text-center space-y-6 max-w-3xl mx-auto mb-16">
           <span className="text-gold uppercase tracking-widest text-xs font-semibold px-3 py-1 rounded-full border border-gold/30 bg-gold/10">

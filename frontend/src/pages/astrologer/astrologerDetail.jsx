@@ -6,8 +6,6 @@ const AstrologerDetail = () => {
 
   return (
     <>
-      <Header />
-
       <section className="w-full max-w-4xl mx-auto px-4 md:px-6 my-16 text-center">
         <p className="text-light-gray/40 text-xs uppercase tracking-widest mb-4">
           Astrologer Profile

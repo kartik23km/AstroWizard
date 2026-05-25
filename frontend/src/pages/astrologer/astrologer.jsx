@@ -26,8 +26,6 @@ const Astrologers = () => {
 
   return (
     <>
-      <Header />
-
       <section className="w-full max-w-7xl mx-auto px-4 md:px-6 my-10">
         {/* Page Header */}
         <div className="text-center mb-12">

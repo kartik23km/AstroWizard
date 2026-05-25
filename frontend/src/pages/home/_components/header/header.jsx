@@ -13,6 +13,7 @@ const navItems = [
   { name: "Services", path: "/services" },
   { name: "Astrologers", path: "/astrologers" },
   { name: "Contact", path: "/contact", hidden: true },
+  { name: "Login", path: "/login" },
 ];
 
 const Header = () => {

@@ -48,8 +48,6 @@ const AstrologerProfile = () => {
 
   return (
     <>
-      <Header />
-
       <section className="w-full max-w-6xl mx-auto px-4 md:px-6 py-10">
         {/* Top Card */}
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-dark-surface/40 backdrop-blur-xl p-6 md:p-8">

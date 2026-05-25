@@ -6,6 +6,7 @@ import Contact from "@/pages/contact/Contact";
 import NotFound from "@/pages/NotFound";
 import Astrologers from "@/pages/astrologer/astrologer";
 import AstrologerProfile from "@/pages/astrologer-profile/astrologerProfile";
+import AuthPage from "@/pages/login/authPage";
 
 export default function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ export default function AppRoutes() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/astrologers" element={<Astrologers />} />
       <Route path="/astrologer-profile/:id" element={<AstrologerProfile />} />
+      <Route path="/login" element={<AuthPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
