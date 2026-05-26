@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
+
+@import "tailwindcss";
+
+body {
+  background-color: var(--color-space-dark);
+  color: var(--color-soft-white);
+  font-family: "Inter", sans-serif;
+}
+
+@theme {
+  --color-primary: #6d28d9;
+  --color-deep-purple: #4c1d95;
+  --color-cosmic-blue: #1e40af;
+  --color-royal-indigo: #312e81;
+  --color-violet-glow: #a855f7;
+
+  --color-gold: #fbbf24;
+  --color-golden-glow: #f59e0b;
+  --color-soft-gold: #fde68a;
+  --color-mystic-pink: #ec4899;
+
+  --color-space-dark: #0b0f1a;
+  --color-deep-night: #111827;
+  --color-dark-surface: #1a1f2e;
+  --color-muted-gray: #334155;
+  --color-light-gray: #cbd5e1;
+  --color-soft-white: #f8fafc;
+
+  --animate-twinkle: twinkle 4s ease-in-out infinite;
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.15;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.2);
+    }
+  }
+}
