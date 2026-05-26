@@ -153,11 +153,11 @@ const Footer = () => {
         <div className="h-px bg-white/5 mb-8" />
 
         {/* Bottom Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-light-gray/30">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-xs text-light-gray/30">
           <p>
             &copy; {new Date().getFullYear()} AstroWizard. All rights reserved.
           </p>
-          <p className="flex items-center gap-1.5">
+          <p className="items-center gap-1.5 hidden">
             Crafted with
             <span className="text-mystic-pink animate-pulse">♥</span>
             for cosmic seekers everywhere.

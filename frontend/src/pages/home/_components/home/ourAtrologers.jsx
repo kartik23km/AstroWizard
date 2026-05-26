@@ -29,18 +29,20 @@ const OurAstrologers = () => {
   return (
     <section className="relative w-full max-w-7xl mx-auto px-4 md:px-6 my-16">
       {/* Section Header */}
-      <div className="text-center mb-12">
-        <span className="font-semibold text-xs md:text-sm text-gold tracking-[0.25em] uppercase mb-3 block">
-          ✦ Expert Guides ✦
-        </span>
-        <h2 className="font-Cinzel text-3xl md:text-4xl lg:text-4xl font-bold text-soft-white mb-4">
-          Meet Our Cosmic Guides
-        </h2>
-        <p className="text-light-gray/80 text-sm md:text-base max-w-xl mx-auto font-light">
-          Consult with our certified, top-rated astrologers to align your path
-          and unlock clarity.
-        </p>
-      </div>
+<div className="text-center mb-12">
+  <span className="font-semibold text-xs md:text-sm text-gold tracking-[0.25em] uppercase mb-3 block">
+    ✦ Trusted Astrologers ✦
+  </span>
+
+  <h2 className="font-Cinzel text-3xl md:text-4xl lg:text-4xl font-bold text-soft-white mb-4">
+    Consult India’s Trusted Astrology Experts
+  </h2>
+
+  <p className="text-light-gray/80 text-sm md:text-base max-w-xl mx-auto font-light">
+    Connect with experienced astrologers for kundli reading, marriage
+    guidance, career advice, numerology, vastu, and daily life solutions.
+  </p>
+</div>
 
       {/* Grid List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
