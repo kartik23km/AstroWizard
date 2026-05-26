@@ -7,21 +7,33 @@ import {
 } from "@heroicons/react/24/outline";
 import { useNavigate, NavLink } from "react-router-dom";
 
-const navItems = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Services", path: "/services" },
-  { name: "Astrologers", path: "/astrologers" },
-  { name: "Contact", path: "/contact", hidden: true },
-  { name: "Login", path: "/login" },
-];
-
 const Header = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
+
+  const isLoggedIn = !!sessionStorage.getItem("token");
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Services", path: "/services" },
+    { name: "Astrologers", path: "/astrologers" },
+    { name: "Contact", path: "/contact", hidden: true },
+    isLoggedIn
+      ? { name: "Logout", path: "#", onClick: handleLogout }
+      : { name: "Login", path: "/login" },
+  ];
 
   return (
     <header className="relative z-50 w-full">
@@ -50,18 +62,30 @@ const Header = () => {
         <nav className="hidden lg:flex">
           <ul className="flex gap-8 lg:gap-10">
             {navItems.map((item) => (
-              <li key={item.name}>
-                <NavLink
-                  to={item.path}
-                  className={({ isActive }) =>
-                    `font-Cinzel text-sm cursor-pointer relative pb-1 transition-colors duration-300 hover:text-yellow-400 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-center after:transition-transform after:duration-300 after:bg-cosmic-blue ` +
-                    (isActive
-                      ? "text-yellow-400 after:scale-x-100"
-                      : "text-soft-white after:scale-x-0 hover:after:scale-x-100")
-                  }
-                >
-                  {item.name}
-                </NavLink>
+              <li key={item.name} className={`${item.hidden ? "hidden" : ""}`}>
+                {item.onClick ? (
+                  <button
+                    onClick={() => {
+                      item.onClick();
+                      closeMenu();
+                    }}
+                    className="font-Cinzel text-sm cursor-pointer relative pb-1 transition-colors duration-300 text-soft-white hover:text-yellow-400 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-center after:transition-transform after:duration-300 after:bg-cosmic-blue after:scale-x-0 hover:after:scale-x-100 bg-transparent border-none outline-none"
+                  >
+                    {item.name}
+                  </button>
+                ) : (
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `font-Cinzel text-sm cursor-pointer relative pb-1 transition-colors duration-300 hover:text-yellow-400 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-center after:transition-transform after:duration-300 after:bg-cosmic-blue ` +
+                      (isActive
+                        ? "text-yellow-400 after:scale-x-100"
+                        : "text-soft-white after:scale-x-0 hover:after:scale-x-100")
+                    }
+                  >
+                    {item.name}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>
@@ -109,18 +133,30 @@ const Header = () => {
                 key={item.name}
                 className={`${item.hidden ? "hidden" : "block"}`}
               >
-                <NavLink
-                  to={item.path}
-                  onClick={closeMenu}
-                  className={({ isActive }) =>
-                    `font-Cinzel block w-full py-3 px-2 text-sm border-b border-white/5 last:border-0 transition-colors duration-200 ` +
-                    (isActive
-                      ? "text-yellow-400"
-                      : "text-light-gray hover:text-gold")
-                  }
-                >
-                  {item.name}
-                </NavLink>
+                {item.onClick ? (
+                  <button
+                    onClick={() => {
+                      item.onClick();
+                      closeMenu();
+                    }}
+                    className="font-Cinzel block w-full text-left py-3 px-2 text-sm border-b border-white/5 last:border-0 transition-colors duration-200 text-light-gray hover:text-gold bg-transparent border-none outline-none cursor-pointer"
+                  >
+                    {item.name}
+                  </button>
+                ) : (
+                  <NavLink
+                    to={item.path}
+                    onClick={closeMenu}
+                    className={({ isActive }) =>
+                      `font-Cinzel block w-full py-3 px-2 text-sm border-b border-white/5 last:border-0 transition-colors duration-200 ` +
+                      (isActive
+                        ? "text-yellow-400"
+                        : "text-light-gray hover:text-gold")
+                    }
+                  >
+                    {item.name}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>

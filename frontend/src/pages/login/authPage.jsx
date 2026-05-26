@@ -6,6 +6,102 @@ const AuthPage = () => {
 
   const [activeTab, setActiveTab] = useState("login");
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Login form state
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  // Register form state
+  const [registerName, setRegisterName] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setError("");
+    setSuccess(false);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!loginEmail || !loginPassword) {
+      setError("Please enter email and password");
+      return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to login");
+      }
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify({ name: data.name, email: data.email, id: data.id }));
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("user", JSON.stringify({ name: data.name, email: data.email, id: data.id }));
+      setSuccess(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (!registerName || !registerEmail || !registerPassword || !registerConfirmPassword) {
+      setError("Please fill in all fields");
+      return;
+    }
+    if (registerPassword !== registerConfirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: registerName,
+          email: registerEmail,
+          password: registerPassword,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to register");
+      }
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify({ name: data.name, email: data.email, id: data.id }));
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("user", JSON.stringify({ name: data.name, email: data.email, id: data.id }));
+      setSuccess(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="relative min-h-screen overflow-hidden">
@@ -71,7 +167,7 @@ const AuthPage = () => {
 
               {/* Login Button */}
               <button
-                onClick={() => setActiveTab("login")}
+                onClick={() => handleTabChange("login")}
                 className={`relative z-10 flex-1 rounded-xl py-3 text-sm font-medium transition-colors duration-300 cursor-pointer ${
                   activeTab === "login"
                     ? "text-soft-white"
@@ -83,7 +179,7 @@ const AuthPage = () => {
 
               {/* Register Button */}
               <button
-                onClick={() => setActiveTab("register")}
+                onClick={() => handleTabChange("register")}
                 className={`relative z-10 flex-1 rounded-xl py-3 text-sm font-medium transition-colors duration-300 cursor-pointer ${
                   activeTab === "register"
                     ? "text-soft-white"
@@ -94,9 +190,21 @@ const AuthPage = () => {
               </button>
             </div>
 
+            {/* Error & Success Messages */}
+            {error && (
+              <div className="mb-6 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                ✦ {error}
+              </div>
+            )}
+            {success && (
+              <div className="mb-6 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                ✦ Cosmic alignment successful! Entering the cosmos...
+              </div>
+            )}
+
             {/* LOGIN FORM */}
             {activeTab === "login" && (
-              <form className="space-y-5">
+              <form onSubmit={handleLogin} className="space-y-5">
                 <div>
                   <label className="mb-2 block text-sm text-light-gray/70">
                     Email Address
@@ -104,6 +212,9 @@ const AuthPage = () => {
 
                   <input
                     type="email"
+                    required
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
                     placeholder="Enter your email"
                     className="w-full rounded-xl border border-white/5 bg-space-dark/80 px-4 py-3 text-soft-white outline-none transition-all duration-300 placeholder:text-light-gray/30 focus:border-violet-glow/50 focus:shadow-[0_0_20px_rgba(109,40,217,0.15)]"
                   />
@@ -116,6 +227,9 @@ const AuthPage = () => {
 
                   <input
                     type="password"
+                    required
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="Enter your password"
                     className="w-full rounded-xl border border-white/5 bg-space-dark/80 px-4 py-3 text-soft-white outline-none transition-all duration-300 placeholder:text-light-gray/30 focus:border-violet-glow/50 focus:shadow-[0_0_20px_rgba(109,40,217,0.15)]"
                   />
@@ -131,18 +245,18 @@ const AuthPage = () => {
                 </div>
 
                 <button
-                  onClick={() => success && navigate("/")}
                   type="submit"
-                  className="w-full cursor-pointer rounded-xl bg-linear-to-r from-primary to-violet-glow py-3 font-medium text-soft-white shadow-lg shadow-violet-glow/20 transition-all duration-300 hover:scale-[1.02] hover:opacity-90"
+                  disabled={loading}
+                  className="w-full cursor-pointer rounded-xl bg-linear-to-r from-primary to-violet-glow py-3 font-medium text-soft-white shadow-lg shadow-violet-glow/20 transition-all duration-300 hover:scale-[1.02] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Enter The Cosmos
+                  {loading ? "Aligning stars..." : "Enter The Cosmos"}
                 </button>
               </form>
             )}
 
             {/* REGISTER FORM */}
             {activeTab === "register" && (
-              <form className="space-y-5">
+              <form onSubmit={handleRegister} className="space-y-5">
                 <div>
                   <label className="mb-2 block text-sm text-light-gray/70">
                     Full Name
@@ -150,6 +264,9 @@ const AuthPage = () => {
 
                   <input
                     type="text"
+                    required
+                    value={registerName}
+                    onChange={(e) => setRegisterName(e.target.value)}
                     placeholder="Enter your full name"
                     className="w-full rounded-xl border border-white/5 bg-space-dark/80 px-4 py-3 text-soft-white outline-none transition-all duration-300 placeholder:text-light-gray/30 focus:border-violet-glow/50 focus:shadow-[0_0_20px_rgba(109,40,217,0.15)]"
                   />
@@ -162,6 +279,9 @@ const AuthPage = () => {
 
                   <input
                     type="email"
+                    required
+                    value={registerEmail}
+                    onChange={(e) => setRegisterEmail(e.target.value)}
                     placeholder="Enter your email"
                     className="w-full rounded-xl border border-white/5 bg-space-dark/80 px-4 py-3 text-soft-white outline-none transition-all duration-300 placeholder:text-light-gray/30 focus:border-violet-glow/50 focus:shadow-[0_0_20px_rgba(109,40,217,0.15)]"
                   />
@@ -174,6 +294,9 @@ const AuthPage = () => {
 
                   <input
                     type="password"
+                    required
+                    value={registerPassword}
+                    onChange={(e) => setRegisterPassword(e.target.value)}
                     placeholder="Create password"
                     className="w-full rounded-xl border border-white/5 bg-space-dark/80 px-4 py-3 text-soft-white outline-none transition-all duration-300 placeholder:text-light-gray/30 focus:border-violet-glow/50 focus:shadow-[0_0_20px_rgba(109,40,217,0.15)]"
                   />
@@ -186,6 +309,9 @@ const AuthPage = () => {
 
                   <input
                     type="password"
+                    required
+                    value={registerConfirmPassword}
+                    onChange={(e) => setRegisterConfirmPassword(e.target.value)}
                     placeholder="Confirm password"
                     className="w-full rounded-xl border border-white/5 bg-space-dark/80 px-4 py-3 text-soft-white outline-none transition-all duration-300 placeholder:text-light-gray/30 focus:border-violet-glow/50 focus:shadow-[0_0_20px_rgba(109,40,217,0.15)]"
                   />
@@ -193,10 +319,10 @@ const AuthPage = () => {
 
                 <button
                   type="submit"
-                  onClick={() => success && navigate("/")}
-                  className="w-full cursor-pointer rounded-xl bg-linear-to-r from-primary to-violet-glow py-3 font-medium text-soft-white shadow-lg shadow-violet-glow/20 transition-all duration-300 hover:scale-[1.02] hover:opacity-90"
+                  disabled={loading}
+                  className="w-full cursor-pointer rounded-xl bg-linear-to-r from-primary to-violet-glow py-3 font-medium text-soft-white shadow-lg shadow-violet-glow/20 transition-all duration-300 hover:scale-[1.02] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Begin Your Journey
+                  {loading ? "Mapping horoscope..." : "Begin Your Journey"}
                 </button>
               </form>
             )}
