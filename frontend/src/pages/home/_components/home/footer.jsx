@@ -15,9 +15,7 @@ const footerLinks = {
   ],
   Company: [
     { label: "About Us", href: "/about" },
-    { label: "Our Astrologers", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "Careers", href: "#" },
+    { label: "Our Astrologers", href: "/astrologers" },
     { label: "Contact", href: "/contact" },
   ],
   Legal: [
