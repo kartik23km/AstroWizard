@@ -1,5 +1,3 @@
-import Header from "@/pages/home/_components/header/header";
-
 export default function About() {
   return (
     <div className="min-h-screen bg-transparent text-soft-white flex flex-col">

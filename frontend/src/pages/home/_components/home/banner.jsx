@@ -20,34 +20,36 @@ const Banner = () => {
   const AUTOPLAY_DELAY = 6000;
 
   const slides = [
-    {
-      type: "image",
-      src: "/images/banner1.png",
-      tag: "COSMIC READINGS",
-      title: "Discover Your Celestial Destiny",
-      description:
-        "Unlock the mysteries of your life path, relationships, and future. Get custom birth chart insights and speak with expert astrologers.",
-      btnText: "Chat Now",
-    },
-    {
-      type: "image",
-      src: "/images/banner2.png",
-      tag: "DAILY HOROSCOPES",
-      title: "Your Daily Cosmic Alignment",
-      description:
-        "Navigate your daily challenges and choices with personalized guidance aligned precisely to your astrological sign.",
-      btnText: "Chat Now",
-    },
-    {
-      type: "image",
-      src: "/images/banner3.jpg",
-      tag: "LIVE CONSULTATION",
-      title: "Talk With Expert Astrologers",
-      description:
-        "Receive instant guidance and clear your doubts on career, health, relationships, and finance via live 1-on-1 private sessions.",
-      btnText: "Chat Now",
-    },
-  ];
+  {
+    type: "image",
+    src: "/images/banner1.png",
+    tag: "VEDIC ASTROLOGY",
+    title: "Discover What Your Kundli Reveals",
+    description:
+      "Get trusted guidance on career, marriage, finance, and relationships from experienced Vedic astrologers across India.",
+    btnText: "Consult Now",
+  },
+
+  {
+    type: "image",
+    src: "/images/banner2.png",
+    tag: "DAILY RASHIFAL",
+    title: "Start Your Day With Cosmic Guidance",
+    description:
+      "Check your daily rashifal, shubh muhurat, rahu kaal, and planetary positions to make better life decisions every day.",
+    btnText: "View Rashifal",
+  },
+
+  {
+    type: "image",
+    src: "/images/banner3.jpg",
+    tag: "LIVE ASTRO CONSULTATION",
+    title: "Talk To India’s Trusted Astrologers",
+    description:
+      "Connect instantly with expert astrologers for kundli matching, love life, business, health, and family guidance.",
+    btnText: "Talk Now",
+  },
+];
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
